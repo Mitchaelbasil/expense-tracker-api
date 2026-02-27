@@ -1,0 +1,6 @@
+flask
+pymysql
+flask-jwt-extended
+bcrypt
+cryptography
+gunicorn
