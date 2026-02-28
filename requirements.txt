@@ -4,3 +4,4 @@ flask-jwt-extended
 bcrypt
 cryptography
 gunicorn
+python-dotenv
