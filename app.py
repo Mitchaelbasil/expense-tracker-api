@@ -1,15 +1,23 @@
-from flask import Flask,jsonify,request
+from dotenv import load_dotenv
+load_dotenv(override=True)
+import os
+print("HOST:", os.environ.get('MYSQLHOST'))
+print("USER:", os.environ.get('MYSQLUSER'))
+print("PASS:", os.environ.get('MYSQLPASSWORD'))
+from flask import Flask, jsonify, request
 import pymysql
 import bcrypt
-from flask_jwt_extended import JWTManager,create_access_token,jwt_required,get_jwt_identity
-app=Flask(__name__)
-app.config['JWT_SECRET_KEY']='Zuckerberg123456789_ExpenseTracker_2026'
-jwt=JWTManager(app)
-con=pymysql.connect(
-    host='localhost',
-    user='root',
-    password='Zuckerberg1',
-    database='mitchael'
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+app = Flask(__name__)
+app.config['JWT_SECRET_KEY'] = 'Zuckerberg123456789_ExpenseTracker_2026'
+jwt = JWTManager(app)
+con = pymysql.connect(
+    host=os.environ.get('MYSQLHOST'),
+    user=os.environ.get('MYSQLUSER'),
+    password=os.environ.get('MYSQLPASSWORD'),
+    database=os.environ.get('MYSQLDATABASE'),
+    port=int(os.environ.get('MYSQLPORT', 3306)),
+    cursorclass=pymysql.cursors.DictCursor
 )
 @app.route('/register',methods=['POST'])
 def register():
